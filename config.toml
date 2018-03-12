@@ -1,0 +1,50 @@
+baseurl         = "http://blog.jamesloos.li/"
+theme           = "casper-two"
+languageCode    = "en-US"
+disqusShortname = ""
+paginate        = 6
+#SectionPagesMenu = "main"
+
+[params]
+  title       = "Blog"
+  subtitle    = "Trying to demo some travisci"
+
+  cover       = ""
+  description = ""
+  metaDescription = ""
+  googleAnalytics = ""
+  customCSS = []
+  RSSLink = ""
+
+  twitterName = "jamesloosli"
+  fbName = "jamesloosli"
+  githubName = "roosri"
+
+  logo = ""
+  orgName = ""
+  orgWebsite = ""
+  orgDescription = ""
+
+  author = ""
+  authorAvatar = "img/ghost-icon.png"
+  authorLocation = "Irvine, ID"
+  authorWebsite = ""
+  authorDescription = ""
+
+  pageNotFoundTitle = "404 - Page not found"
+
+  #casper or caspertwo
+  singleViewStyle = "casper"
+
+[permalinks]
+  post = "/:slug/"
+
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  weight = 200
+
+[[menu.main]]
+  name = "Blog"
+  url = "/blog/"
+  weight = 100
