@@ -3,21 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://blog.jamesloos.li/</loc>
+    <loc>/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://blog.jamesloos.li/blog/</loc>
+    <loc>/blog/</loc>
   </url>
   
   <url>
-    <loc>http://blog.jamesloos.li/categories/</loc>
+    <loc>/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://blog.jamesloos.li/tags/</loc>
+    <loc>/tags/</loc>
     <priority>0</priority>
   </url>
   
