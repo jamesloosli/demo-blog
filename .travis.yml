@@ -11,7 +11,9 @@ services:
 
 # Hugo is a binary that lives in this repo, and we're basically just running shell commands
 language: generic
-cache: binaries
+cache:
+  directories:
+  - binaries
 
 # Compiling the site, then loading the static bits into a container
 jobs:
@@ -20,6 +22,7 @@ jobs:
     script: 
     - binaries/hugo
   - stage: Build and Tag
+    script: 
     - docker build -t demo-blog:${TRAVIS_COMMIT} .
     - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
     - docker tag demo-blog:${TRAVIS_COMMIT} roosri/demo-blog:${TRAVIS_COMMIT}
