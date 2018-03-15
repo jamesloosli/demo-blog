@@ -2,5 +2,6 @@ FROM nginx:alpine
 
 MAINTAINER James Loosli <loosli@gmail.com>
 
-COPY public/ /usr/share/nginx/html/
+RUN apk update && apk add curl
 
+COPY public/ /usr/share/nginx/html/
