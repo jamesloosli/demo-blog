@@ -29,7 +29,7 @@ jobs:
     - docker push roosri/demo-blog
   - stage: Test
     script:
-    - docker run -d -p -p 127.0.0.1:80:4567 --rm ${DOCKER_USERNAME}/demo-blog:${TRAVIS_COMMIT}
+    - docker run -d -p 127.0.0.1:80:4567 --rm ${DOCKER_USERNAME}/demo-blog:${TRAVIS_COMMIT}
     - sleep 3 && curl 127.0.0.1:4567
 #  - stage: Tag Latest
 #    if: branch = master
