@@ -1,17 +1,39 @@
+# Build master, and all pull requests 
+# XXX: For tagged releases, push a tagged version of the container
+
 if: branch = master
 if: type = pull_request
 
+# Using docker, therefore sudo
 sudo: required
-
 services:
-  - docker
+- docker
 
+# Hugo is a binary that lives in this repo, and we're basically just running shell commands
 language: generic
+cache: binaries
 
-install:
-  - wget https://github.com/gohugoio/hugo/releases/download/v0.31.1/hugo_0.31.1_Linux-64bit.deb
-  - sudo dpkg -i hugo*.deb
+# Compiling the site, then loading the static bits into a container
+jobs:
+  include:
+  - stage: Compile
+    script: binaries/hugo
+  - script: docker build -t demo-blog:${TRAVIS_COMMIT} .
+  - stage: Tag Commit
+    script: docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - script: docker tag demo-blog:${TRAVIS_COMMIT} roosri/demo-blog:${TRAVIS_COMMIT}
+  - stage: Tag Latest
+    if: branch = master
+    script: docker tag roosri/demo-blog:${TRAVIS_COMMIT} roosri/demo-blog:latest
+  - stage: Push
+    script: docker push roosri/demo-blog
+#- stage: Test
+#  script:
+#    - docker run --rm demo-blog:${TRAVIS_COMMIT} 
 
-script:
-  - hugo
-  - docker build -t ${TRAVIS_COMMIT} .
+stages:
+  - Compile
+  - Test
+  - Tag Commit
+  - Tag Latest
+  - Push

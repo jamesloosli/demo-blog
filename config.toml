@@ -1,3 +1,5 @@
+theme = "kiera"
+
 pygmentsCodeFences = true
 
 disqusShortname = "" #Disqus shortname
