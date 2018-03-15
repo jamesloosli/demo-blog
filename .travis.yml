@@ -25,16 +25,18 @@ jobs:
     script: 
     - docker build -t demo-blog:${TRAVIS_COMMIT} .
     - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-    - docker tag demo-blog:${TRAVIS_COMMIT} roosri/demo-blog:${TRAVIS_COMMIT}
+    - docker tag demo-blog:${TRAVIS_COMMIT} ${DOCKER_USERNAME}/demo-blog:${TRAVIS_COMMIT}
     - docker push roosri/demo-blog
+  - stage: Test
+    script:
+    - docker run --rm ${DOCKER_USERNAME}/demo-blog:${TRAVIS_COMMIT} curl localhost
 #  - stage: Tag Latest
 #    if: branch = master
 #    script: docker tag roosri/demo-blog:${TRAVIS_COMMIT} roosri/demo-blog:latest
 #  - stage: Push
-#- stage: Test
-#  script:
-#    - docker run --rm demo-blog:${TRAVIS_COMMIT} 
+
 
 stages:
   - Compile
   - Build and Tag
+  - Test
