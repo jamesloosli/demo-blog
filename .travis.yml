@@ -1,8 +1,8 @@
-# Build master, and all pull requests 
-# XXX: For tagged releases, push a tagged version of the container
-
-if: branch = master
+# Only build pull requests, develop, and master when tags are present 
+# For tagged releases, push a tagged version of the container
 if: type = pull_request
+if: branch = develop
+if: (branch = master) AND (tag IS present)
 
 # Using docker, therefore sudo
 sudo: required
@@ -29,13 +29,11 @@ jobs:
     script:
     - docker run -d -p 80:4567 --rm ${DOCKER_USERNAME}/demo-blog:${TRAVIS_COMMIT}
     - sleep 3 && curl -s localhost:4567 | grep '<!doctype html>'
-#  - stage: Tag Latest
-#    if: branch = master
-#    script: docker tag roosri/demo-blog:${TRAVIS_COMMIT} roosri/demo-blog:latest
-#  - stage: Push
+  - stage: Deploy
+    script: echo "Deploy goes here"
 
 
 stages:
-  - Compile
-  - Build and Tag
+  - Build 
   - Test
+  - Deploy
