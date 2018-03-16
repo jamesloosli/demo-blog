@@ -13,24 +13,22 @@ services:
 language: generic
 cache:
   directories:
-  - binaries
+  - bin
 
 # Compiling the site, then loading the static bits into a container
 jobs:
   include:
-  - stage: Compile
+  - stage: Build
     script: 
     - binaries/hugo
-  - stage: Build and Tag
-    script: 
     - docker build -t demo-blog:${TRAVIS_COMMIT} .
     - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
     - docker tag demo-blog:${TRAVIS_COMMIT} ${DOCKER_USERNAME}/demo-blog:${TRAVIS_COMMIT}
     - docker push roosri/demo-blog
   - stage: Test
     script:
-    - docker run -d -p 127.0.0.1:80:4567 --rm ${DOCKER_USERNAME}/demo-blog:${TRAVIS_COMMIT}
-    - sleep 3 && curl 127.0.0.1:4567
+    - docker run -d -p 80:4567 --rm ${DOCKER_USERNAME}/demo-blog:${TRAVIS_COMMIT}
+    - sleep 3 && curl -s localhost:4567 | grep '<!doctype html>'
 #  - stage: Tag Latest
 #    if: branch = master
 #    script: docker tag roosri/demo-blog:${TRAVIS_COMMIT} roosri/demo-blog:latest
