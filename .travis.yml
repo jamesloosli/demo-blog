@@ -31,6 +31,7 @@ jobs:
     - sleep 3 && curl -s localhost | grep '<!doctype html>'
   - stage: Deploy
     script: echo "Deploy goes here"
+    if: branch IN (master, develop)
 
 
 stages:
