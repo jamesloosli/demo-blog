@@ -1,8 +1,6 @@
 # Only build pull requests, develop, and master when tags are present 
 # For tagged releases, push a tagged version of the container
-if: type = pull_request
-if: branch = develop
-if: (branch = master) AND (tag IS present)
+if: (type = pull_request) OR (branch = develop) OR ( (branch = master) AND (tag IS present) )
 
 # Using docker, therefore sudo
 sudo: required
