@@ -4,7 +4,7 @@ set -ex
 
 # Compatibility between local and travis environments
 COMMIT_HASH=${TRAVIS_COMMIT+"$(git rev-parse HEAD)"}
-set PATH=$PATH:./bin
+export PATH=$PATH:./bin
 
 # Check environment variables and packages
 function check_pkg() {
@@ -45,5 +45,3 @@ done
 echo "Building static assets with hugo"
 hugo
 
-echo "Creating new container"
-docker build -t demo-blog:${COMMIT_HASH}
