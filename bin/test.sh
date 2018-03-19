@@ -41,6 +41,6 @@ for env_var in $env_vars; do
   check_env $env_var
 done
 
-docker run -p 80:80 --rm ${DOCKER_USERNAME}/${REPO_NAME}:${COMMIT_HASH}
+docker run -d -p 80:80 --rm ${DOCKER_USERNAME}/${REPO_NAME}:${COMMIT_HASH}
 docker ps
 sleep 3 && curl -s localhost | grep '<!doctype html>'
