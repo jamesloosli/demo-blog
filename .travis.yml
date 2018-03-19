@@ -1,5 +1,5 @@
 # Only build pull requests and tags
-if: (type = pull_request AND (NOT branch IN (master)) OR (type = tag AND branch = master AND tag =~ ^v\d+\.\d+\.\d+$)
+if: (type = pull_request AND (NOT branch IN (master)) OR (type = tag AND branch = master AND tag =~ ^v\d+\.\d+$)
 
 # Using docker, therefore sudo
 sudo: required
